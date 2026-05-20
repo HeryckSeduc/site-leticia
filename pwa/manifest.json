@@ -1,0 +1,42 @@
+{
+    "name": "Para você, My Moon 🌙",
+    "short_name": "My Moon",
+    "description": "3 anos de amor e uma surpresa especial esperando por você.",
+    "start_url": "./",
+    "scope": "/",
+    "display": "standalone",
+    "orientation": "portrait-primary",
+    "background_color": "#070d1f",
+    "theme_color": "#070d1f",
+    "categories": ["lifestyle", "productivity"],
+    "lang": "pt-BR",
+    "dir": "ltr",
+    "icons": [
+        {
+            "src": "assets/icons/icon-192.png",
+            "sizes": "192x192",
+            "type": "image/png",
+            "purpose": "any maskable"
+        },
+        {
+            "src": "assets/icons/icon-512.png",
+            "sizes": "512x512",
+            "type": "image/png",
+            "purpose": "any maskable"
+        }
+    ],
+    "screenshots": [
+        {
+            "src": "assets/backgrounds/lirio.webp",
+            "sizes": "540x720",
+            "type": "image/webp",
+            "form_factor": "narrow"
+        },
+        {
+            "src": "assets/backgrounds/lirio.webp",
+            "sizes": "1080x1440",
+            "type": "image/webp",
+            "form_factor": "wide"
+        }
+    ]
+}
