@@ -1545,17 +1545,19 @@ video.tl-foto { cursor: default; }
     }
 
     /* ── TIMELINE MOBILE ── */
+    /* TODOS os cards alinhados à esquerda, bolinhas perfeitamente centralizadas */
+    
     .timeline {
         padding: 8px 0;
         margin-top: 32px;
     }
 
-    /* Linha vertical à esquerda — mais discreta */
+    /* Linha vertical à esquerda — alinhada com as bolinhas */
     .timeline::before {
-        left: 6px;
+        left: 7px;
         transform: none;
         opacity: 0.1;
-        /* linha mais curta nas pontas */
+        width: 1px;
         background: linear-gradient(180deg,
             transparent 0%,
             var(--c-azul) 5%,
@@ -1563,71 +1565,92 @@ video.tl-foto { cursor: default; }
             transparent 100%);
     }
 
+    /* RESET completo do grid desktop */
     .tl-item {
-        display: flex;
+        display: flex !important;
+        grid-template-columns: unset !important;
+        gap: 0 !important;
         flex-direction: row;
         align-items: flex-start;
-        /* sem gap — o padding do tl-lado cuida do espaço */
-        gap: 0;
         margin-bottom: 24px;
     }
 
-    /* Eixo mínimo, só para o ponto */
+    /* Eixo com largura fixa — bolinhas centralizadas */
     .tl-eixo {
         flex-shrink: 0;
-        width: 14px;
+        flex-basis: 16px;
+        width: 16px;
         display: flex;
         justify-content: center;
+        align-items: flex-start;
         padding-top: 16px;
+        margin: 0;
         padding-right: 0;
+        order: -1;  /* SEMPRE VEM PRIMEIRO no mobile */
     }
 
+    /* Bolinhas perfeitamente alinhadas */
     .tl-ponto {
-        width: 7px;
-        height: 7px;
-        /* hover desativado em touch */
-        transition: none;
+        width: 8px;
+        height: 8px;
+        flex-shrink: 0;
+        transition: none !important;
     }
 
     .tl-item:hover .tl-ponto {
-        transform: none;
-        box-shadow: none;
+        transform: none !important;
+        box-shadow: none !important;
     }
 
-    /* Lado vazio sumindo */
+    /* Lado vazio SEMPRE escondido */
     .tl-lado--vazio {
         display: none !important;
     }
 
-    /* Lado com card — ocupa tudo com espaço confortável */
+    /* RESET dos estilos alternados do desktop */
+    .tl-lado {
+        flex: 1;
+        padding-left: 16px;
+        padding-top: 0;
+        text-align: left !important;
+        order: 1;  /* Vem sempre depois do eixo */
+    }
+
     .tl-lado--esq,
     .tl-lado--dir {
         flex: 1;
         padding-left: 16px;
         padding-top: 0;
         text-align: left !important;
+        order: 1;  /* Vem sempre depois do eixo */
     }
 
-    /* Card com bordas suaves */
+    /* RESET de estilos herdados do desktop */
+    .tl-lado--esq .tl-info,
+    .tl-lado--dir .tl-info {
+        text-align: left !important;
+    }
+
+    /* Card full-width limpo */
     .tl-card {
         width: 100%;
         border-radius: 10px;
-        /* Sem hover em touch */
-        transition: none;
+        transition: none !important;
     }
 
     .tl-card:hover {
-        transform: none;
-        box-shadow: none;
+        transform: none !important;
+        box-shadow: none !important;
         border-color: var(--c-borda);
     }
 
-    /* Imagem mais compacta — evita card muito longo */
+    /* Imagem compacta */
     .tl-foto {
         height: 145px;
         object-position: center 30%;
     }
 
+    /* Info com texto sempre à esquerda */
     .tl-info {
         padding: 12px 13px 14px;
         text-align: left !important;
@@ -1649,7 +1672,7 @@ video.tl-foto { cursor: default; }
         margin-bottom: 5px;
     }
 
-    /* Card "Hoje" sem padding externo */
+    /* Card "Hoje" */
     .tl-card--hoje .tl-info {
         padding: 14px 13px;
     }
