@@ -465,10 +465,6 @@ button {
     text-align: center;
 }
 
-.secao + .secao {
-    border-top: 1px solid var(--c-borda);
-}
-
 
 /* ── 08. HERO ───────────────────────────────────────────────── */
 .secao--hero { padding: 108px 0 88px; }
@@ -1189,88 +1185,6 @@ video.tl-foto { cursor: default; }
 
 
 /* ── 15. TIMELINE — MOBILE (refatorada) ─────────────────────── */
-/*
-   No mobile a timeline abandona o grid de 3 colunas.
-   Cada item vira: [linha vertical] [card full-width]
-   Elegante, legível, emocional.
-*/
-@media (max-width: 600px) {
-
-    .timeline {
-        padding: 16px 0;
-        margin-top: 36px;
-    }
-
-    /* Linha vertical à esquerda */
-    .timeline::before {
-        left: 9px;
-        transform: none;
-        opacity: 0.14;
-    }
-
-    .tl-item {
-        /* Substitui o grid por flex simples */
-        display: flex;
-        flex-direction: row;
-        align-items: flex-start;
-        gap: 0;
-        margin-bottom: 32px;
-    }
-
-    /* Esconde o lado vazio */
-    .tl-lado--vazio { display: none !important; }
-
-    /* Eixo com ponto — posição fixa à esquerda */
-    .tl-eixo {
-        flex-shrink: 0;
-        width: 20px;
-        display: flex;
-        justify-content: center;
-        padding-top: 16px;
-        padding-right: 0;
-    }
-
-    .tl-ponto {
-        width: 8px; height: 8px;
-    }
-
-    /* Lado com card ocupa todo o restante */
-    .tl-lado--esq,
-    .tl-lado--dir {
-        flex: 1;
-        text-align: left !important;
-        padding-left: 12px;
-        padding-top: 0;
-    }
-
-    /* Card full-width, visual mais respira */
-    .tl-card {
-        width: 100%;
-        border-radius: 10px;
-    }
-
-    .tl-card:hover {
-        transform: none; /* desativa hover no touch */
-    }
-
-    /* Foto/vídeo com altura menor no mobile */
-    .tl-foto {
-        height: 160px;
-    }
-
-    /* Texto do card sempre à esquerda */
-    .tl-info { text-align: left !important; }
-
-    /* "Hoje" ocupa também a linha toda */
-    .tl-card--hoje {
-        padding: 0;
-    }
-
-    .tl-card--hoje .tl-info {
-        padding: 16px;
-    }
-}
-
 
 /* ── 16. RODAPÉ ─────────────────────────────────────────────── */
 .rodape {
@@ -1489,63 +1403,304 @@ video.tl-foto { cursor: default; }
 .fade-out { animation: fadeOut 0.85s var(--ease-smooth) forwards; }
 
 
-/* ── 19. RESPONSIVO ─────────────────────────────────────────── */
+/* ── RESPONSIVO ─────────────────────────────────────────────── */
 
 /* Tablet */
 @media (max-width: 768px) {
-    :root { --s-secao: 80px; }
-    .contador-grande { gap: 14px; }
-    .c-sep { font-size: 2rem; }
+    :root { --s-secao: 78px; }
+    .contador-grande { gap: 12px; }
+    .c-sep { font-size: 1.9rem; }
 }
 
-/* Mobile */
+/* ── MOBILE PRINCIPAL (600px) ───────────────────────────────── */
 @media (max-width: 600px) {
     :root {
-        --s-secao: 64px;
+        --s-secao: 56px;
         --s-pad:   20px;
     }
 
-    .secao--hero { padding: 84px 0 68px; }
-
-    /* Galeria mobile */
-    .galeria-hint { display: block; }
-
-    .galeria-quadro {
-        width: min(320px, 88vw);
-        height: min(400px, 76vw);
+    /* ── HERO ── */
+    .secao--hero {
+        padding: 72px 0 56px;
     }
 
-    .galeria-progresso { width: min(320px, 88vw); }
-    .galeria-seta { width: 36px; height: 36px; }
+    /* Título menor — evita sensação de esmagamento */
+    .hero-titulo {
+        font-size: clamp(2.8rem, 10vw, 4rem);
+        gap: 8px;
+        margin-bottom: 24px;
+        /* empilha em coluna no mobile */
+        flex-direction: column;
+        align-items: center;
+    }
 
-    /* WhatsApp */
-    .whats { border-radius: 16px; }
-    .whats-chat { max-height: 360px; padding: 14px 11px; }
-    .msg { max-width: 86%; }
-    .msg p { font-size: 0.84rem; }
+    /* Lua levemente menor */
+    .hero-lua {
+        font-size: clamp(2rem, 7vw, 3rem);
+        /* sem float no mobile — economiza CPU */
+        animation: none;
+    }
 
-    /* Contador */
-    .contador-card { padding: 28px 18px; }
-    .c-num { font-size: clamp(2.8rem, 14vw, 3.5rem); }
-    .contador-grande { gap: 10px; }
-    .c-sep { font-size: 1.6rem; margin-bottom: 12px; }
+    .hero-data {
+        font-size: 0.88rem;
+        gap: 8px;
+    }
 
-    /* Modal */
-    .modal-conteudo { padding: 32px 22px; }
-    .modal-texto { font-size: 1.05rem; }
+    /* ── CONTADOR ── */
+    .contador-card {
+        padding: 24px 16px;
+    }
 
-    /* Mensagem */
-    .mensagem-bloco { padding: 0; }
+    .contador-grande {
+        gap: 8px;
+    }
+
+    /* Números das unidades grandes */
+    .c-num {
+        font-size: clamp(2.4rem, 12vw, 3rem);
+    }
+
+    .c-sep {
+        font-size: 1.4rem;
+        margin-bottom: 8px;
+    }
+
+    .c-leg {
+        font-size: 0.52rem;
+        letter-spacing: 0.22em;
+    }
+
+    /* Horas/min/seg menores */
+    .c-num-sm {
+        font-size: clamp(1.3rem, 4vw, 1.7rem);
+    }
+
+    .contador-total {
+        font-size: 0.88rem;
+        margin-top: 20px;
+    }
+
+    /* ── MÚSICA ── */
+    .musica-card {
+        padding: 16px 14px 14px;
+        border-radius: 12px;
+    }
+
+    /* ── MENSAGEM ── */
+    .mensagem-texto {
+        font-size: 1.05rem;
+        line-height: 2;
+    }
+
+    .aspas {
+        font-size: clamp(3rem, 8vw, 4.5rem);
+    }
+
+    /* ── GALERIA ── */
+    .galeria-hint { display: block; }
+
+    /* Imagem com proporção fixada — evita altura exagerada */
+    .galeria-quadro {
+        width: min(280px, 84vw);
+        /* aspect-ratio cuida da altura — sem min/max-height conflitando */
+    }
+
+    .galeria-progresso {
+        width: min(280px, 84vw);
+    }
+
+    /* Setas menores e mais próximas */
+    .galeria-seta {
+        width: 36px;
+        height: 36px;
+        font-size: 0.85rem;
+        opacity: 0.35;
+    }
+
+    /* Legenda menor */
+    .galeria-legenda {
+        font-size: 0.85rem;
+    }
+
+    /* ── WHATSAPP ── */
+    .whats {
+        border-radius: 14px;
+    }
+
+    .whats-chat {
+        max-height: 340px;
+        padding: 14px 10px;
+        gap: 5px;
+    }
+
+    /* Mensagens quase full-width — parece mais real no celular */
+    .msg {
+        max-width: 88%;
+        padding: 8px 10px 5px;
+    }
+
+    .msg p {
+        font-size: 0.84rem;
+        line-height: 1.5;
+    }
+
+    /* ── TIMELINE MOBILE ── */
+    .timeline {
+        padding: 8px 0;
+        margin-top: 32px;
+    }
+
+    /* Linha vertical à esquerda — mais discreta */
+    .timeline::before {
+        left: 6px;
+        transform: none;
+        opacity: 0.1;
+        /* linha mais curta nas pontas */
+        background: linear-gradient(180deg,
+            transparent 0%,
+            var(--c-azul) 5%,
+            var(--c-azul) 95%,
+            transparent 100%);
+    }
+
+    .tl-item {
+        display: flex;
+        flex-direction: row;
+        align-items: flex-start;
+        /* sem gap — o padding do tl-lado cuida do espaço */
+        gap: 0;
+        margin-bottom: 24px;
+    }
+
+    /* Eixo mínimo, só para o ponto */
+    .tl-eixo {
+        flex-shrink: 0;
+        width: 14px;
+        display: flex;
+        justify-content: center;
+        padding-top: 16px;
+        padding-right: 0;
+    }
+
+    .tl-ponto {
+        width: 7px;
+        height: 7px;
+        /* hover desativado em touch */
+        transition: none;
+    }
+
+    .tl-item:hover .tl-ponto {
+        transform: none;
+        box-shadow: none;
+    }
+
+    /* Lado vazio sumindo */
+    .tl-lado--vazio {
+        display: none !important;
+    }
+
+    /* Lado com card — ocupa tudo com espaço confortável */
+    .tl-lado--esq,
+    .tl-lado--dir {
+        flex: 1;
+        padding-left: 16px;
+        padding-top: 0;
+        text-align: left !important;
+    }
+
+    /* Card com bordas suaves */
+    .tl-card {
+        width: 100%;
+        border-radius: 10px;
+        /* Sem hover em touch */
+        transition: none;
+    }
+
+    .tl-card:hover {
+        transform: none;
+        box-shadow: none;
+        border-color: var(--c-borda);
+    }
+
+    /* Imagem mais compacta — evita card muito longo */
+    .tl-foto {
+        height: 145px;
+        object-position: center 30%;
+    }
+
+    .tl-info {
+        padding: 12px 13px 14px;
+        text-align: left !important;
+    }
+
+    .tl-titulo {
+        font-size: 0.94rem;
+        margin-bottom: 5px;
+    }
+
+    .tl-desc {
+        font-size: 0.83rem;
+        line-height: 1.65;
+        opacity: 0.28;
+    }
+
+    .tl-data {
+        font-size: 0.5rem;
+        margin-bottom: 5px;
+    }
+
+    /* Card "Hoje" sem padding externo */
+    .tl-card--hoje .tl-info {
+        padding: 14px 13px;
+    }
+
+    /* ── MODAL ── */
+    .modal-conteudo {
+        padding: 28px 18px;
+        border-radius: 16px;
+    }
+
+    .modal-texto {
+        font-size: 1rem;
+        line-height: 1.85;
+    }
+
+    /* ── RODAPÉ ── */
+    .rodape {
+        padding: 44px 20px 60px;
+        gap: 14px;
+    }
 }
 
-/* Telas muito pequenas */
+/* ── MOBILE PEQUENO (480px) ─────────────────────────────────── */
+@media (max-width: 480px) {
+
+    .hero-titulo {
+        font-size: clamp(2.4rem, 9vw, 3.2rem);
+    }
+
+    .et-l1 { font-size: clamp(1.6rem, 5.5vw, 2.2rem); }
+    .et-l2 { font-size: clamp(1.3rem, 4.5vw, 1.8rem); }
+    .et-amor { font-size: clamp(2.2rem, 8vw, 3rem); }
+
+    .galeria-quadro { width: min(260px, 86vw); }
+    .galeria-progresso { width: min(260px, 86vw); }
+}
+
+/* ── MOBILE MUITO PEQUENO (360px) ───────────────────────────── */
 @media (max-width: 360px) {
-    :root { --s-pad: 16px; }
-    .et-amor { font-size: 2.4rem; }
-    .msg { max-width: 90%; }
+    :root { --s-pad: 14px; }
+
+    .et-amor { font-size: 2rem; }
+    .msg { max-width: 92%; }
+    .contador-card { padding: 18px 12px; }
+    .c-num { font-size: 2.2rem; }
+
+    .galeria-quadro { width: min(240px, 88vw); }
+    .galeria-progresso { width: min(240px, 88vw); }
 }
 
-/* Acessibilidade — movimento reduzido */
+/* ── REDUÇÃO DE MOVIMENTO ───────────────────────────────────── */
 @media (prefers-reduced-motion: reduce) {
     *, *::before, *::after {
         animation-duration:        0.01ms !important;
